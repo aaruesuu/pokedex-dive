@@ -463,17 +463,18 @@ document.addEventListener('DOMContentLoaded', () => {
             suggestionsBox.classList.add('hidden');
         }
     });
-    
-    const openModal = (title, content) => {
-        modalContent.innerHTML = `<h3>${title}</h3>${content}`;
-        modalOverlay.classList.remove('hidden');
-        modalOverlay.classList.add('fade-in');
-    };
 
-    const closeModal = () => {
-        modalOverlay.classList.add('hidden');
-        modalOverlay.classList.remove('fade-in');
-    };
+const modalOverlay = document.getElementById('modal-overlay');
+
+const openModal = (title, content) => {
+    modalContent.innerHTML = `<h3>${title}</h3>${content}`;
+    modalOverlay.classList.remove('hidden'); // hiddenクラスは使わないので念のため削除
+    modalOverlay.classList.add('visible');
+};
+
+const closeModal = () => {
+    modalOverlay.classList.remove('visible');
+};
 
     howToPlayButton.addEventListener('click', () => {
         openModal('遊び方', `
