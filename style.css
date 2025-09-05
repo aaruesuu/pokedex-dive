@@ -271,67 +271,17 @@ body.game-mode-active #score-screen .mode-button:hover {
 }
 .info-button:hover { border-color: var(--accent-color-s5); color: var(--accent-color-s5); }
 
-/* ===== モーダルのブロックディゾルブ アニメーション ===== */
-@keyframes blockDissolve {
-    0% {
-        /* 最初は何も見えない */
-        opacity: 0;
-        /* 小さなノイズがかかった状態 */
-        filter: blur(10px) brightness(0);
-        /* 表示領域をランダムな四角形でクリップする */
-        clip-path: inset(45% 48% 42% 40%);
-    }
-    25% {
-        opacity: 1;
-        filter: blur(5px) brightness(1);
-        clip-path: inset(25% 20% 32% 30%);
-    }
-    50% {
-        filter: blur(2px) brightness(1);
-        clip-path: inset(15% 40% 12% 20%);
-    }
-    75% {
-        filter: blur(1px) brightness(1);
-        clip-path: inset(5% 10% 22% 5%);
-    }
-    100% {
-        /* 最終的にクリアな状態になる */
-        opacity: 1;
-        filter: blur(0) brightness(1);
-        /* 表示領域を全て表示 */
-        clip-path: inset(0% 0% 0% 0%);
-    }
-}
-
-
-/* ===== モーダル ===== */
 #modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(38, 50, 56, 0.8); z-index: 40; display: flex;
     justify-content: center; align-items: center; backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease;
 }
-/* 表示用のクラス */
-#modal-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
 #modal {
     width: 90%; max-width: 600px; background: #37474f; border: 2px solid #78909c;
     color: var(--text-color-s5); z-index: 50; padding: 2rem; position: relative;
-    /* 最初は見えない状態 */
-    opacity: 0;
+    border-radius: 2px;
 }
-
-/* モーダル表示時に適用するアニメーション */
-#modal-overlay.visible #modal {
-    /* steps()を使うことでカクカクした動きになる */
-    animation: blockDissolve 0.5s steps(4, end) forwards;
-}
-
 #modal-content h3 {
     font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 1rem;
     padding-bottom: 0.5rem; border-bottom: 1px solid var(--accent-color-s5); color: var(--accent-color-s5);
@@ -351,6 +301,7 @@ body.game-mode-active #score-screen .mode-button:hover {
 .color-chip.yellow { background-color: rgba(255, 215, 0, 0.3); }
 .color-chip.gray { background-color: rgba(84, 110, 122, 0.4); }
 
+
 /* ===== 汎用クラス ===== */
 .hidden { display: none !important; }
 .fade-in { animation: fadeIn 0.5s ease-out forwards; }
@@ -360,3 +311,68 @@ body.game-mode-active #score-screen .mode-button:hover {
 #result-history::-webkit-scrollbar, #suggestions-box::-webkit-scrollbar { width: 12px; }
 #result-history::-webkit-scrollbar-track, #suggestions-box::-webkit-scrollbar-track { background: #263238; }
 #result-history::-webkit-scrollbar-thumb, #suggestions-box::-webkit-scrollbar-thumb { background: #546e7a; border: 2px solid #263238; }
+
+#orientation-overlay {
+    display: none; /* デフォルトでは非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    color: white;
+    z-index: 200;
+    font-family: 'DotGothic16', sans-serif;
+}
+
+.orientation-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.orientation-message p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.phone-icon {
+    width: 64px;
+    height: 100px;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    position: relative;
+    animation: rotate-phone 1.5s ease-in-out infinite;
+}
+.phone-icon::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+@keyframes rotate-phone {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+    100% { transform: rotate(-90deg); }
+}
+
+/* 画面の高さが850px以下、かつ、縦向きの場合に適用 */
+@media screen and (max-height: 850px) and (orientation: portrait) {
+    #theme-container, #loader-overlay {
+        display: none; /* ゲーム画面を非表示 */
+    }
+    #orientation-overlay {
+        display: block; /* 案内画面を表示 */
+    }
+}
