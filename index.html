@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex Dive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+    <div id="loader-overlay">
+        <div class="pokeball-loader"></div>
+        <p>Now Loading...</p>
+    </div>
+
+    <div id="theme-container">
+        <header id="app-header">
+            <h1 class="logo">Pokedex <span class="logo-accent">Dive</span></h1>
+            <div class="header-buttons">
+                <button id="home-button" class="header-button">HOME</button>
+                <button id="how-to-play-button" class="header-button">遊び方</button>
+                <button id="about-site-button" class="header-button">このサイトについて</button>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div id="mode-selection-screen">
+                <h2 class="selection-title">プレイするモードを選んでください</h2>
+                <div class="mode-selection-container">
+                    <button id="score-attack-button" class="mode-button score-button">
+                        <div class="mode-button-content">
+                            <h3>スコアアタック</h3>
+                            <p>3匹当てるまでの回答数を競え！</p>
+                        </div>
+                        <div class="info-button" data-mode="scoreAttack">?</div>
+                    </button>
+                    <button id="classic-mode-button" class="mode-button classic-button">
+                        <div class="mode-button-content">
+                            <h3>クラシック</h3>
+                            <p>5回のうちにポケモンを当てろ！</p>
+                        </div>
+                        <div class="info-button" data-mode="classic">?</div>
+                    </button>
+                    <button id="base-stats-mode-button" class="mode-button stats-button">
+                        <div class="mode-button-content">
+                            <h3>種族値アタック</h3>
+                            <p>種族値をヒントに3匹当てろ！</p>
+                        </div>
+                        <div class="info-button" data-mode="baseStats">?</div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="game-container" class="hidden">
+                <div id="game-info-area">
+                    <h2 id="game-title"></h2>
+                    <p id="game-description"></p>
+                </div>
+                <div id="game-status"></div>
+                <div id="game-controls">
+                    <div id="input-area">
+                        <input type="text" id="guess-input" placeholder="ポケモンのなまえを入力" autocomplete="off">
+                        <button id="guess-button" class="guess-button">GUESS</button>
+                    </div>
+                    <div id="suggestions-box" class="hidden"></div>
+                    <div class="action-buttons">
+                        <button id="next-question-button" class="hidden action-button">次の問題へ</button>
+                        <button id="back-to-menu-button" class="hidden back-button">モード選択に戻る</button>
+                    </div>
+                </div>
+                <div id="message-area"></div>
+                <div id="results-area">
+                    <div id="result-header" class="hidden">
+                        </div>
+                    <div id="result-history"></div>
+                </div>
+            </div>
+
+            <div id="score-screen" class="hidden">
+                 <div class="score-card">
+                    <h2 class="score-title">GAME CLEAR!</h2>
+                    <p class="score-subtitle">あなたのスコアは...</p>
+                    <p class="final-score-display"><span id="final-score"></span> <span class="score-unit">回</span></p>
+                    <button id="play-again-button" class="mode-button classic-button">もう一度遊ぶ</button>
+                </div>
+            </div>
+        </main>
+
+        <footer id="app-footer">
+            <p>&copy; 2025 Pokedex Dive. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <div id="modal-overlay" class="hidden">
+        <div id="modal">
+            <button id="modal-close-button">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script src="pokedex-data.js"></script>
+    <script src="gen9-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
