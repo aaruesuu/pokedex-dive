@@ -468,12 +468,13 @@ const modalOverlay = document.getElementById('modal-overlay');
 
 const openModal = (title, content) => {
     modalContent.innerHTML = `<h3>${title}</h3>${content}`;
-    modalOverlay.classList.remove('hidden'); // hiddenクラスは使わないので念のため削除
-    modalOverlay.classList.add('visible');
+    modalOverlay.classList.remove('hidden');
+    modalOverlay.classList.add('fade-in'); // シンプルなフェードインアニメーション
 };
 
 const closeModal = () => {
-    modalOverlay.classList.remove('visible');
+    modalOverlay.classList.add('hidden');
+    modalOverlay.classList.remove('fade-in');
 };
 
     howToPlayButton.addEventListener('click', () => {
